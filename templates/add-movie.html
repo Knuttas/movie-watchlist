@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie watchlist</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+
+<body>
+  <nav>
+    <a href="/">Watchlist</a>
+    |
+    <a href="/add-movie">Add movie</a>
+  </nav>
+  <input onkeyup="getanswer(document.getElementById('querybox').value)" id="querybox"> <div id="answer"></div> <div id="answer1"></div> <div id="answer2"></div> 
+  <div id="answer3"></div><div id="answer4"></div><div id="answer5"></div><div id="answer6"></div><div id="answer7"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+  </script> 
+  <script> var data;
+  function getanswer(q){
+    $.get("https://www.omdbapi.com/?s="+q+"&apikey=ba1f4581", function(rawdata){
+    var rawstring = JSON.stringify(rawdata);
+    data = JSON.parse(rawstring);
+    var title = data.Search[0].Title;
+    var title1 = data.Search[1].Title;
+    var title2 = data.Search[2].Title;
+    var title3 = data.Search[3].Title;
+    var title4 = data.Search[4].Title;
+    var title5 = data.Search[5].Title;
+    var title6 = data.Search[6].Title;
+    var title7 = data.Search[7].Title;
+    var year = data.Search[0].Year;
+    var year1 = data.Search[1].Year; 
+    var year2 = data.Search[2].Year; 
+    var year3 = data.Search[3].Year;
+    var year4 = data.Search[4].Year;
+    var year5 = data.Search[5].Year;
+    var year6 = data.Search[6].Year;
+    var year7 = data.Search[7].Year;
+    var imdburl = "https://www.imdb.com/title/"+data.Search[0].imdbID+"/";
+    var imdburl1 = "https://www.imdb.com/title/"+data.Search[1].imdbID+"/";
+    var imdburl2 = "https://www.imdb.com/title/"+data.Search[2].imdbID+"/";
+    var imdburl3 = "https://www.imdb.com/title/"+data.Search[3].imdbID+"/";
+    var imdburl4 = "https://www.imdb.com/title/"+data.Search[4].imdbID+"/";
+    var imdburl5 = "https://www.imdb.com/title/"+data.Search[5].imdbID+"/";
+    var imdburl6 = "https://www.imdb.com/title/"+data.Search[6].imdbID+"/";
+    var imdburl7 = "https://www.imdb.com/title/"+data.Search[7].imdbID+"/";
+    var posterurl = data.Search[0].Poster;
+    var posterurl1 = data.Search[1].Poster;
+    var posterurl2 = data.Search[2].Poster;
+    var posterurl3 = data.Search[3].Poster;
+    var posterurl4 = data.Search[4].Poster;
+    var posterurl5 = data.Search[5].Poster;
+    var posterurl6 = data.Search[6].Poster;
+    var posterurl7 = data.Search[7].Poster;
+    document.getElementById('answer').innerHTML="<h3>"+title+"</h3><br> <img src= '"+posterurl+"'><br><p> Year Released: "+year+
+      "</p><button onclick='addMovie(data.Search[0].imdbID)' class='btn add btn-primary'>Add</button>";
+    document.getElementById('answer1').innerHTML="<h3>"+title1+"</h3><br> <img src= '"+posterurl1+"'><br><p> Year Released: "+year1+
+      "</p><button onclick='addMovie(data.Search[1].imdbID)' class='btn add btn-primary'>Add</button>"; 
+    document.getElementById('answer2').innerHTML="<h3>"+title2+"</h3><br> <img src= '"+posterurl2+"'><br><p> Year Released: "+year2+
+      "</p><button onclick='addMovie(data.Search[2].imdbID)' class='btn add btn-primary'>Add</button>";  
+    document.getElementById('answer3').innerHTML="<h3>"+title3+"</h3><br> <img src= '"+posterurl3+"'><br><p> Year Released: "+year3+
+      "</p><button onclick='addMovie(data.Search[3].imdbID)' class='btn add btn-primary'>Add</button>";
+    document.getElementById('answer4').innerHTML="<h3>"+title4+"</h3><br> <img src= '"+posterurl4+"'><br><p> Year Released: "+year4+
+      "</p><button onclick='addMovie(data.Search[4].imdbID)' class='btn add btn-primary'>Add</button>";
+    document.getElementById('answer5').innerHTML="<h3>"+title5+"</h3><br> <img src= '"+posterurl5+"'><br><p> Year Released: "+year5+
+      "</p><button onclick='addMovie(data.Search[5].imdbID)' class='btn add btn-primary'>Add</button>";
+    document.getElementById('answer6').innerHTML="<h3>"+title6+"</h3><br> <img src= '"+posterurl6+"'><br><p> Year Released: "+year6+
+      "</p><button onclick='addMovie(data.Search[6].imdbID)' class='btn add btn-primary'>Add</button>";
+    document.getElementById('answer7').innerHTML="<h3>"+title7+"</h3><br> <img src= '"+posterurl7+"'><br><p> Year Released: "+year7+
+      "</p><button onclick='addMovie(data.Search[7].imdbID)' class='btn add btn-primary'>Add</button>";
+    
+    }); 
+    
+  }
+  </script>
+  <script>
+    var data2
+    function addMovie(imdbID) {
+      console.log(imdbID)
+      $.get("https://www.omdbapi.com/?i="+imdbID+"&apikey=ba1f4581", function(rawdata2){
+       $.post("/add-movie-to-list", rawdata2);
+    })  
+  };
+  </script>
+</body>
+</html>

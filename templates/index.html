@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie watchlist</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav>
+    <a href="/">Watchlist</a>
+    |
+    <a href="/add-movie">Add movie</a>
+    |
+    <a href="/sort">Sort movies by runtime</a>
+    <br>
+    <br>
+    <form action="/select-genre" method="post">
+  <label for="genre">Select by genre:</label>
+  <select name="genre" id="genre">
+    <option value="Action">Action</option>
+    <option value="Adventure">Adventure</option>
+    <option value="Animation">Animation</option>
+    <option value="Comedy">Comedy</option>
+    <option value="Crime">Crime</option>
+    <option value="Drama">Drama</option>
+    <option value="Family">Family</option>
+    <option value="Fantasy">Fantasy</option>
+    <option value="Horror">Horror</option>
+    <option value="Mystery">Mystery</option>
+    <option value="Romance">Romance</option>
+    <option value="Sci-Fi">Sci-Fi</option>
+    <option value="Thriller">Thriller</option>
+  </select>
+  <input type="submit" value="Submit">
+</form>
+  </nav>
+
+  {% for movie in movies %}
+
+  <div id="movie";>
+    <h4>{{ loop.index }}: {{ movie['Title'] }}</h4>
+    <br>
+    <img src="{{ movie['Poster']}}">
+    <br>
+    <p>Genre: {{ movie['Genre']}}</p>
+    <p id="runtime">Runtime: {{ movie['Runtime']}}</p>
+    <a style ="text-decoration: none;" href="/move-up/{{ loop.index0 }}">⬆️</a>
+    <a style ="text-decoration: none;" href="/move-down/{{ loop.index0 }}">⬇️</a>
+    <a style ="text-decoration: none;" href="/remove/{{ loop.index0 }}">🗑️</a>
+  </div>
+
+{% endfor %}
+
+</body>
+</html>
