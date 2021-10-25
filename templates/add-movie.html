@@ -81,9 +81,7 @@
   }
   </script>
   <script>
-    var data2
     function addMovie(imdbID) {
-      console.log(imdbID)
       $.get("https://www.omdbapi.com/?i="+imdbID+"&apikey=ba1f4581", function(rawdata2){
        $.post("/add-movie-to-list", rawdata2);
     })  
