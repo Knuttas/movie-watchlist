@@ -18,6 +18,7 @@
     |
     <a href="/add-movie">Add movie</a>
   </nav>
+  <!-- this is a script that searches using the OMDb API to search for any existing movie and displaying the top 8 results -->
   <input onkeyup="getanswer(document.getElementById('querybox').value)" id="querybox"> <div id="answer"></div> <div id="answer1"></div> <div id="answer2"></div> 
   <div id="answer3"></div><div id="answer4"></div><div id="answer5"></div><div id="answer6"></div><div id="answer7"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
@@ -43,14 +44,6 @@
     var year5 = data.Search[5].Year;
     var year6 = data.Search[6].Year;
     var year7 = data.Search[7].Year;
-    var imdburl = "https://www.imdb.com/title/"+data.Search[0].imdbID+"/";
-    var imdburl1 = "https://www.imdb.com/title/"+data.Search[1].imdbID+"/";
-    var imdburl2 = "https://www.imdb.com/title/"+data.Search[2].imdbID+"/";
-    var imdburl3 = "https://www.imdb.com/title/"+data.Search[3].imdbID+"/";
-    var imdburl4 = "https://www.imdb.com/title/"+data.Search[4].imdbID+"/";
-    var imdburl5 = "https://www.imdb.com/title/"+data.Search[5].imdbID+"/";
-    var imdburl6 = "https://www.imdb.com/title/"+data.Search[6].imdbID+"/";
-    var imdburl7 = "https://www.imdb.com/title/"+data.Search[7].imdbID+"/";
     var posterurl = data.Search[0].Poster;
     var posterurl1 = data.Search[1].Poster;
     var posterurl2 = data.Search[2].Poster;
@@ -80,6 +73,7 @@
     
   }
   </script>
+  <!-- a function that gets extended data by searching OMDb by movie ID by clicking the add button. Adds that data to the movie list -->
   <script>
     function addMovie(imdbID) {
       $.get("https://www.omdbapi.com/?i="+imdbID+"&apikey=ba1f4581", function(rawdata2){

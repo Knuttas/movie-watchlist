@@ -20,6 +20,7 @@
     <a href="/sort">Sort movies by runtime</a>
     <br>
     <br>
+    <!-- a form to filter the movies by genre -->
     <form action="/select-genre" method="post">
   <label for="genre">Select by genre:</label>
   <select name="genre" id="genre">
@@ -41,6 +42,7 @@
 </form>
   </nav>
 
+  <!-- loops all movies in the list and displaying them one by one by using a for loop -->
   {% for movie in movies %}
 
   <div id="movie";>
