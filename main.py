@@ -27,10 +27,10 @@ def select_genre():
 
   return render_template("sort-by-genre.html", movies_sorted=movies_sorted)
 
-# adds the selected movie to the watchlist if it is currently not in the list
+# adds the selected movie to the watchlist if it is currently not in the list and converts runtime to an int for sorting purposes
 @app.post('/add-movie-to-list')
 def add_movie():
-  data = request.form
+  data = dict(request.form)
   does_contain = False
   for movie in movies:
     if movie["imdbID"] == data["imdbID"]:
@@ -40,6 +40,9 @@ def add_movie():
       does_contain = False
 
   if does_contain == False:
+    time_int = data['Runtime'].split()
+    time_int = int(time_int[0])
+    data['Runtime'] = time_int
     movies.append(data)
 
   return redirect('/')

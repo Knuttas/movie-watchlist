@@ -51,7 +51,7 @@
     <img src="{{ movie['Poster']}}">
     <br>
     <p>Genre: {{ movie['Genre']}}</p>
-    <p id="runtime">Runtime: {{ movie['Runtime']}}</p>
+    <p id="runtime">Runtime: {{ movie['Runtime']}} min</p>
     <a style ="text-decoration: none;" href="/move-up/{{ loop.index0 }}">⬆️</a>
     <a style ="text-decoration: none;" href="/move-down/{{ loop.index0 }}">⬇️</a>
     <a style ="text-decoration: none;" href="/remove/{{ loop.index0 }}">🗑️</a>
